@@ -1,6 +1,7 @@
 package com.danplay.server.user.domain.entity;
 
 import com.danplay.server.user.domain.enumerations.Gender;
+import com.danplay.server.user.domain.enumerations.Sports;
 import lombok.*;
 import org.springframework.lang.Nullable;
 
@@ -16,26 +17,29 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "user_id")
-    private Long id;
+	@Id
+	@GeneratedValue
+	@Column(name = "user_id")
+	private Long id;
 
-    private String email;
+	private String email;
 
-    private String password;
+	private String password;
 
-    private String name;
+	private String name;
 
-    private Date birth;
+	private Date birth;
 
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
+	@Enumerated(EnumType.STRING)
+	private Gender gender;
 
-    @Nullable
-    @OneToMany(mappedBy = "user")
-    private List<UserMatch> matches = new ArrayList<>();
+    @ElementCollection
+	private List<Sports> favorites;
 
-    @Setter
-    private Boolean emailAuthentication;
+	@Nullable
+	@OneToMany(mappedBy = "user")
+	private List<UserMatch> matches = new ArrayList<>();
+
+	@Setter
+	private Boolean emailAuthentication;
 }
