@@ -15,15 +15,10 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
-    private final MailService mailService;
 
-    @PostMapping("/signup")
+    @PostMapping("signup")
     public ResponseEntity<UserResponse> signUp(@RequestBody SignUpRequest signUpRequest) {
         return ResponseEntity.ok().body(userService.signUp(signUpRequest));
     }
 
-    @PostMapping("mailconfirm/{mail}")
-    public ResponseEntity<MailBooleanResponse> mailConfirm(@PathVariable("mail") String mail) {
-        return ResponseEntity.ok().body(mailService.sendVerificationMail(mail));
-    }
 }

@@ -41,6 +41,9 @@ dependencies {
 
 	// email
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	// 오류..?
+	implementation 'com.google.code.findbugs:jsr305:3.0.2'
 }
 
 tasks.named('test') {
