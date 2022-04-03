@@ -33,6 +33,17 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 
+	// redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	// @ConfigurationProperties
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+	// email
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	// 오류..?
+	implementation 'com.google.code.findbugs:jsr305:3.0.2'
 }
 
 tasks.named('test') {
