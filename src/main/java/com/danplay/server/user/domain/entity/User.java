@@ -1,6 +1,9 @@
 package com.danplay.server.user.domain.entity;
 
+import com.danplay.server.auth.enumerations.Authority;
+import com.danplay.server.base.BaseEntity;
 import com.danplay.server.user.domain.enumerations.Gender;
+import com.danplay.server.user.domain.enumerations.Prefer;
 import lombok.*;
 import org.springframework.lang.Nullable;
 
@@ -12,30 +15,31 @@ import java.util.List;
 @Entity
 @Builder
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
-public class User {
+@AllArgsConstructor @NoArgsConstructor
+public class User extends BaseEntity {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "user_id")
-    private Long id;
+    private String mail;
 
-    private String email;
+    private String loginId;
 
     private String password;
 
     private String name;
+
+    private String phoneNumber;
 
     private Date birth;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Nullable
-    @OneToMany(mappedBy = "user")
-    private List<UserMatch> matches = new ArrayList<>();
+//    @Enumerated(EnumType.STRING)
+//    private ArrayList<Prefer> preferSport;
 
-    @Setter
-    private Boolean emailAuthentication;
+    @OneToMany(mappedBy = "user")
+    private List<UserMatch> matches;
+
+
+    @Enumerated(EnumType.STRING)
+    private Authority authority = Authority.USER;
 }

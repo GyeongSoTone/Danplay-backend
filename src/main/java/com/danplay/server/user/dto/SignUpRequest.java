@@ -1,29 +1,34 @@
 package com.danplay.server.user.dto;
 
 import com.danplay.server.user.domain.enumerations.Gender;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.danplay.server.user.domain.enumerations.Prefer;
+import lombok.*;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.util.ArrayList;
 import java.util.Date;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
+@AllArgsConstructor
 public class SignUpRequest {
 
-    private String email;
+    private String mail;
 
+    private String loginId;
+
+    @Setter
     private String password;
 
     private String name;
+
+    private String phoneNumber;
 
     private Date birth;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Enumerated(EnumType.STRING)
+    private ArrayList<Prefer> preferSport;
 }

@@ -1,11 +1,14 @@
 package com.danplay.server.mail.presentation;
 
 import com.danplay.server.mail.application.MailService;
-import com.danplay.server.mail.dto.MailBooleanResponse;
 import com.danplay.server.mail.dto.MailCodeRequest;
+import com.danplay.server.mail.dto.MailRequest;
+import com.danplay.server.mail.dto.MailStringResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -14,13 +17,13 @@ public class MailController {
 
     private final MailService mailService;
 
-    @PostMapping("mailconfirm/{mail}")
-    public ResponseEntity<MailBooleanResponse> mailConfirm(@PathVariable("mail") String mail) {
-        return ResponseEntity.ok().body(mailService.sendVerificationMail(mail));
+    @PostMapping("mailConfirm/")
+    public ResponseEntity<MailStringResponse> mailConfirm(@Valid @RequestBody MailRequest mailRequest) {
+        return ResponseEntity.ok().body(mailService.sendVerificationMail(mailRequest.getMail()));
     }
 
-    @PostMapping("mailcodeconfirm/")
-    public ResponseEntity<MailBooleanResponse> mailCodeConfirm(@RequestBody MailCodeRequest mailCodeRequest) {
+    @PostMapping("mailCodeConfirm/")
+    public ResponseEntity<MailStringResponse> mailCodeConfirm(@Valid @RequestBody MailCodeRequest mailCodeRequest) {
         return ResponseEntity.ok().body(mailService.checkMailCode(mailCodeRequest));
     }
 }

@@ -6,6 +6,6 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor @AllArgsConstructor
-public class MailBooleanResponse {
-    private Boolean sign;
+public class MailStringResponse {
+    private String message;
 }

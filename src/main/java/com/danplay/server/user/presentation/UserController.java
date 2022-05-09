@@ -1,7 +1,5 @@
 package com.danplay.server.user.presentation;
 
-import com.danplay.server.mail.application.MailService;
-import com.danplay.server.mail.dto.MailBooleanResponse;
 import com.danplay.server.user.application.UserService;
 import com.danplay.server.user.dto.SignUpRequest;
 import com.danplay.server.user.dto.UserResponse;
