@@ -23,7 +23,11 @@ public class MatchService {
 	}
 
 	@Transactional(readOnly = true)
-	public Match findMatchById(Long findMatchById) throws Exception {
-		return matchRepository.findById(findMatchById).orElseThrow(Exception::new);
+	public Match findMatchById(Long matchId) throws Exception {
+		return matchRepository.findById(matchId).orElseThrow(Exception::new);
+	}
+
+	public void removeMatchById(Long matchId) {
+		matchRepository.deleteById(matchId);
 	}
 }
