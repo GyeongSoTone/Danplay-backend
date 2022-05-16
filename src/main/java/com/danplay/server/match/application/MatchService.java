@@ -2,6 +2,7 @@ package com.danplay.server.match.application;
 
 import com.danplay.server.match.domain.entity.Match;
 import com.danplay.server.match.domain.repository.MatchRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +14,9 @@ public class MatchService {
 
 	public Match registerMatch(Match match) {
 		return matchRepository.save(match);
+	}
+
+	public List<Match> findMatches() {
+		return matchRepository.findAll();
 	}
 }

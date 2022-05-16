@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Getter
@@ -35,6 +36,7 @@ public class Match {
 
 	private Date startTime;
 
+	@CreationTimestamp
 	private Date applyTime;
 
 	@Builder
