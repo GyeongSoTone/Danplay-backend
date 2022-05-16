@@ -1,5 +1,6 @@
 package com.danplay.server.match.domain.entity;
 
+import com.danplay.server.match.dto.MatchRequest;
 import com.danplay.server.user.domain.entity.UserMatch;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,12 +41,22 @@ public class Match {
 	private Date applyTime;
 
 	@Builder
-	public Match(String sports, int maxNumberOfParticipants, String place, String title, String content, Date startTime) {
+	public Match(String sports, int maxNumberOfParticipants, String place, String title,
+		String content, Date startTime) {
 		this.sports = sports;
 		this.maxNumberOfParticipants = maxNumberOfParticipants;
 		this.place = place;
 		this.title = title;
 		this.content = content;
 		this.startTime = startTime;
+	}
+
+	public void updateMatch(MatchRequest matchRequest) {
+		this.sports = matchRequest.getSports();
+		this.maxNumberOfParticipants = matchRequest.getMaxNumberOfParticipants();
+		this.place = matchRequest.getPlace();
+		this.startTime = matchRequest.getStartTime();
+		this.title = matchRequest.getTitle();
+		this.content = matchRequest.getContent();
 	}
 }

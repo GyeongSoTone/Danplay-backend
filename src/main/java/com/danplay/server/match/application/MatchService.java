@@ -2,6 +2,7 @@ package com.danplay.server.match.application;
 
 import com.danplay.server.match.domain.entity.Match;
 import com.danplay.server.match.domain.repository.MatchRepository;
+import com.danplay.server.match.dto.MatchRequest;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,9 @@ public class MatchService {
 
 	public void removeMatchById(Long matchId) {
 		matchRepository.deleteById(matchId);
+	}
+
+	public void updateMatch(Match match, MatchRequest matchRequest) {
+		match.updateMatch(matchRequest);
 	}
 }
