@@ -1,5 +1,6 @@
 package com.danplay.server.user.domain.entity;
 
+import com.danplay.server.match.domain.entity.Match;
 import lombok.Getter;
 
 import javax.persistence.*;
