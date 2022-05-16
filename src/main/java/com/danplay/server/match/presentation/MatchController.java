@@ -26,7 +26,7 @@ public class MatchController {
 	private final MatchService matchService;
 
 	@PostMapping("/register")
-	public ResponseEntity<HttpStatus> register(@RequestBody MatchRequest matchRequest) {
+	public ResponseEntity<HttpStatus> registerMatch(@RequestBody MatchRequest matchRequest) {
 		matchService.registerMatch(matchRequest.toEntity());
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
