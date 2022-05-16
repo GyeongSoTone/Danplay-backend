@@ -13,8 +13,8 @@ public class MatchService {
 
 	private final MatchRepository matchRepository;
 
-	public Match registerMatch(Match match) {
-		return matchRepository.save(match);
+	public void registerMatch(Match match) {
+		matchRepository.save(match);
 	}
 
 	@Transactional(readOnly = true)
