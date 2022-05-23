@@ -40,3 +40,10 @@ spring:
           auth: true
           starttls:
             enable: true
+  jwt:
+    subject: Danplay
+    secret: eksvmffpdlflvorxhfld
+    claims:
+      user-id: danplay-backend
+      authority: admin
+      email: test

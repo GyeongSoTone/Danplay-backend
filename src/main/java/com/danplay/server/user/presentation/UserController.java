@@ -1,6 +1,7 @@
 package com.danplay.server.user.presentation;
 
 import com.danplay.server.user.application.UserService;
+import com.danplay.server.user.dto.SignInRequest;
 import com.danplay.server.user.dto.SignUpRequest;
 import com.danplay.server.user.dto.UserResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,4 +20,8 @@ public class UserController {
         return ResponseEntity.ok().body(userService.signUp(signUpRequest));
     }
 
+    @PostMapping("signin")
+    public ResponseEntity<UserResponse> signUp(@RequestBody SignInRequest signInRequest) {
+        return ResponseEntity.ok().body(userService.signIn(signInRequest));
+    }
 }
