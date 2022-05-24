@@ -28,8 +28,6 @@ public class UserService {
     @Transactional
     public UserResponse signUp(SignUpRequest signUpRequest) {
 
-        if (userRepository.existsByLoginId(signUpRequest.getLoginId())) throw new DuplicateLoginIdException();
-
         signUpRequest.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
 
         final User user = UserMapper.INSTANCE.requestToUser(signUpRequest);

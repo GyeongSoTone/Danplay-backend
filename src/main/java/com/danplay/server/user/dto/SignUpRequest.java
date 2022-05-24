@@ -15,8 +15,6 @@ public class SignUpRequest {
 
     private String mail;
 
-    private String loginId;
-
     @Setter
     private String password;
 

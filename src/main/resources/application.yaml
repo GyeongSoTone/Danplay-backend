@@ -18,7 +18,8 @@ spring:
       path: /h2-console
 
   redis:
-    host: localhost
+    #host: localhost
+    host: host.docker.internal
     port: 6379
 
   jpa:
