@@ -18,8 +18,6 @@ public class UserResponse {
 
     private String mail;
 
-    private String loginId;
-
     private String name;
 
     private String phoneNumber;
