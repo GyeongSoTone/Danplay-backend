@@ -8,6 +8,7 @@ import lombok.*;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,12 @@ import java.util.List;
 @Builder
 @Getter
 @AllArgsConstructor @NoArgsConstructor
-public class User extends BaseEntity {
+public class User {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "user_id")
+    private Long id;
 
     private String mail;
 
@@ -26,17 +32,16 @@ public class User extends BaseEntity {
 
     private String phoneNumber;
 
-    private Date birth;
+    private LocalDate birth;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-//    @Enumerated(EnumType.STRING)
-//    private ArrayList<Prefer> preferSport;
+    @Enumerated(EnumType.STRING)
+    private Enum<Prefer> preferSport;
 
     @OneToMany(mappedBy = "user")
     private List<UserMatch> matches;
-
 
     @Enumerated(EnumType.STRING)
     private Authority authority = Authority.USER;
