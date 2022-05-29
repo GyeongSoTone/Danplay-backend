@@ -1,16 +1,12 @@
 package com.danplay.server.user.domain.entity;
 
 import com.danplay.server.auth.enumerations.Authority;
-import com.danplay.server.base.BaseEntity;
 import com.danplay.server.user.domain.enumerations.Gender;
 import com.danplay.server.user.domain.enumerations.Prefer;
 import lombok.*;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
