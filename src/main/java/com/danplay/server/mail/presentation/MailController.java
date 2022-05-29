@@ -17,12 +17,12 @@ public class MailController {
 
     private final MailService mailService;
 
-    @PostMapping("confirm/")
+    @PostMapping("confirm")
     public ResponseEntity<MailStringResponse> mailConfirm(@Valid @RequestBody MailRequest mailRequest) {
         return ResponseEntity.ok().body(mailService.sendVerificationMail(mailRequest.getMail()));
     }
 
-    @PostMapping("codeConfirm/")
+    @PostMapping("code")
     public ResponseEntity<MailStringResponse> mailCodeConfirm(@Valid @RequestBody MailCodeRequest mailCodeRequest) {
         return ResponseEntity.ok().body(mailService.checkMailCode(mailCodeRequest));
     }
