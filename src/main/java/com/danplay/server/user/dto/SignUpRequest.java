@@ -6,8 +6,8 @@ import lombok.*;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -28,5 +28,5 @@ public class SignUpRequest {
     private Gender gender;
 
     @Enumerated(EnumType.STRING)
-    private ArrayList<Prefer> preferSport;
+    private List<Prefer> preferSport;
 }

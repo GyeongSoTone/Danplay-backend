@@ -1,12 +1,12 @@
 package com.danplay.server.user.application;
 
 import com.danplay.server.auth.token.TokenInfo;
+import com.danplay.server.user.domain.entity.PreferSport;
 import com.danplay.server.user.domain.entity.User;
+import com.danplay.server.user.domain.enumerations.Prefer;
+import com.danplay.server.user.domain.repository.PreferSportRepository;
 import com.danplay.server.user.domain.repository.UserRepository;
-import com.danplay.server.user.dto.SignInRequest;
-import com.danplay.server.user.dto.SignUpRequest;
-import com.danplay.server.user.dto.UserMapper;
-import com.danplay.server.user.dto.UserResponse;
+import com.danplay.server.user.dto.*;
 import com.danplay.server.user.exception.DuplicateLoginIdException;
 import com.danplay.server.user.exception.InvalidPasswordException;
 import com.danplay.server.user.exception.NonExistMailUserException;
@@ -17,11 +17,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PreferSportRepository preferSportRepository;
     private final JwtUtil jwtUtil;
     private final PasswordEncoder passwordEncoder;
 
@@ -30,11 +35,17 @@ public class UserService {
 
         signUpRequest.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
 
-        final User user = UserMapper.INSTANCE.requestToUser(signUpRequest);
+        final User user = UserMapper.INSTANCE.reqToE(signUpRequest);
         final User savedUser = userRepository.save(user);
+        UserResponse userResponse = UserMapper.INSTANCE.eToRes(savedUser);
 
-        UserResponse userResponse = UserMapper.INSTANCE.userToResponse(savedUser);
+        List<PreferSport> preferSports = new ArrayList<>();
+        for (Prefer prefer : signUpRequest.getPreferSport())
+            preferSports.add(PreferSport.builder().user(savedUser).prefer(prefer).build());
+        preferSportRepository.saveAll(preferSports);
+
         userResponse.setTokenResponse(jwtUtil.generateToken(getTokenInfo(savedUser)));
+        userResponse.setPreferSport(signUpRequest.getPreferSport());
 
         return userResponse;
     }
@@ -45,8 +56,13 @@ public class UserService {
 
         if (!passwordEncoder.matches(signInRequest.getPassword(), user.getPassword())) throw new InvalidPasswordException();
 
-        UserResponse userResponse = UserMapper.INSTANCE.userToResponse(user);
+        UserResponse userResponse = UserMapper.INSTANCE.eToRes(user);
         userResponse.setTokenResponse(jwtUtil.generateToken(getTokenInfo(user)));
+
+        List<Prefer> prefers = new ArrayList<>();
+        for (PreferSport preferSport : user.getPreferSports())
+            prefers.add(preferSport.getPrefer());
+        userResponse.setPreferSport(prefers);
 
         return userResponse;
     }
@@ -54,4 +70,5 @@ public class UserService {
     private TokenInfo getTokenInfo(User user) { // 이거 JwtUtil로 돌릴지
         return new TokenInfo(user.getId(), user.getMail(), user.getAuthority());
     }
+
 }

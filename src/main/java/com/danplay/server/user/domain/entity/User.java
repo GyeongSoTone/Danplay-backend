@@ -2,7 +2,6 @@ package com.danplay.server.user.domain.entity;
 
 import com.danplay.server.auth.enumerations.Authority;
 import com.danplay.server.user.domain.enumerations.Gender;
-import com.danplay.server.user.domain.enumerations.Prefer;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,8 +32,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Enumerated(EnumType.STRING)
-    private Enum<Prefer> preferSport;
+    @Setter
+    @OneToMany(mappedBy = "user")
+    private List<PreferSport> preferSports;
 
     @OneToMany(mappedBy = "user")
     private List<UserMatch> matches;
