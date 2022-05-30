@@ -21,6 +21,7 @@ public class User {
 
     private String mail;
 
+    @Setter
     private String password;
 
     private String name;

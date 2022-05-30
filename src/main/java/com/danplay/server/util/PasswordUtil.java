@@ -16,6 +16,7 @@ public class PasswordUtil {
             int selectRandomPw = (int) (Math.random() * (pwCollection.length));
             ranPw.append(pwCollection[selectRandomPw]);
         }
+        ranPw.append(1).append('!').append('a'); // 수정필요
         return ranPw.toString();
     }
 }
