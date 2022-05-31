@@ -17,7 +17,7 @@ public class PreferSport {
 
     @Id
     @GeneratedValue
-    @Column(name = "preferSport_id")
+    @Column(name = "prefer_sport_id")
     private Long id;
 
     @ManyToOne
