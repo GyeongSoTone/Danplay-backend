@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/match")
@@ -57,6 +59,12 @@ public class MatchController {
 		final Match match = matchService.findMatchById(matchId);
 		matchService.updateMatch(match, matchRequest);
 		matchService.registerMatch(match);
+		return ResponseEntity.status(HttpStatus.OK).build();
+	}
+
+	@PostMapping("/test")
+	public ResponseEntity<HttpStatus> testJWT(HttpServletRequest httpServletRequest) {
+		matchService.testJWT(httpServletRequest);
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 }

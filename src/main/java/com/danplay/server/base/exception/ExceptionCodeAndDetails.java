@@ -1,5 +1,7 @@
 package com.danplay.server.base.exception;
 
+import com.danplay.server.auth.exception.InvalidAccessToken;
+import com.danplay.server.auth.exception.InvalidRequestToken;
 import com.danplay.server.mail.exception.DuplicateMailException;
 import com.danplay.server.user.exception.InvalidFindPasswordException;
 import com.danplay.server.mail.exception.InvalidMailCodeException;
@@ -21,7 +23,10 @@ public enum ExceptionCodeAndDetails {
     INVALID_MAIL_CODE(HttpStatus.CONFLICT, "1002", "유효하지 않은 인증코드 입니다", InvalidMailCodeException.class),
     NON_EXIST_MAIL_USER(HttpStatus.NOT_FOUND, "2001", "존재하지 않는 계정입니다", NonExistMailUserException.class),
     INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "2002","비밀번호가 일치하지 않습니다", InvalidPasswordException.class),
-    INVALID_FIND_PASSWORD(HttpStatus.UNAUTHORIZED, "2003", "서버에 저장된 사용자 정보와 일치하지 않습니다", InvalidFindPasswordException.class);
+    INVALID_FIND_PASSWORD(HttpStatus.UNAUTHORIZED, "2003", "서버에 저장된 사용자 정보와 일치하지 않습니다", InvalidFindPasswordException.class),
+    INVALID_REQUEST_TOKEN(HttpStatus.UNAUTHORIZED, "3001", "인증 토큰이 요청 헤더에 존재하지 않습니다", InvalidRequestToken.class),
+    INVALID_ACCESS_TOKEN(HttpStatus.UNAUTHORIZED, "3002", "엑세스 토큰이 유효하지 않습니다", InvalidAccessToken.class);
+
 
     private final HttpStatus status;
     private final String code;
