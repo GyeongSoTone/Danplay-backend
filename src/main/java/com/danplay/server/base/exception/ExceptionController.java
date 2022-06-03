@@ -15,7 +15,7 @@ public class ExceptionController {
 
     @ExceptionHandler(DanplayException.class)
     public ResponseEntity<DanplayExceptionDto> ExceptionHandler(DanplayException exception) {
-        return ResponseEntity.badRequest()
+        return ResponseEntity.status(exception.getStatus())
                 .body(new DanplayExceptionDto(exception.getCode(), exception.getMessage()));
     }
 

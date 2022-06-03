@@ -2,6 +2,7 @@ package com.danplay.server.user.application;
 
 import com.danplay.server.auth.token.TokenInfo;
 import com.danplay.server.mail.application.MailService;
+import com.danplay.server.mail.exception.DuplicateMailException;
 import com.danplay.server.user.exception.InvalidFindPasswordException;
 import com.danplay.server.user.domain.entity.PreferSport;
 import com.danplay.server.user.domain.entity.User;
@@ -33,6 +34,8 @@ public class UserService {
 
     @Transactional
     public UserResponse signUp(SignUpRequest signUpRequest) {
+
+        if (userRepository.existsByMail(signUpRequest.getMail())) throw new DuplicateMailException();
 
         signUpRequest.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
 
