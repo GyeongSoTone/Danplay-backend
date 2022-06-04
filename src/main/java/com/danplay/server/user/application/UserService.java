@@ -98,7 +98,7 @@ public class UserService {
         return userResponse;
     }
 
-    private TokenInfo getTokenInfo(User user) { // 이거 JwtUtil로 돌릴지
+    private TokenInfo getTokenInfo(User user) {
         return new TokenInfo(user.getId(), user.getMail(), user.getAuthority());
     }
 
