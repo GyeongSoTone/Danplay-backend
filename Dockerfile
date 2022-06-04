@@ -1,6 +1,6 @@
 FROM amazoncorretto:11.0.14
 
-EXPOSE 2021
+EXPOSE 50000
 
 ARG JAR_FILE=build/libs/*.jar
 

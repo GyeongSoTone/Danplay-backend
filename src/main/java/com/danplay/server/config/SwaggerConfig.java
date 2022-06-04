@@ -11,21 +11,21 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
-@EnableSwagger2
 public class SwaggerConfig {
+
     @Bean
     public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
+        return new Docket(DocumentationType.OAS_30)
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.ant("/api/**"))
-                .build();
+                .build()
+                .apiInfo(apiInfo());
     }
 
-    public ApiInfo apiInfo() {
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Danplay")
+                .title("Danplay API Documentation")
                 .version("1.0")
                 .description("Spring Boot Rest API")
                 .build();

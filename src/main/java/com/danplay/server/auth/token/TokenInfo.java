@@ -10,7 +10,7 @@ public class TokenInfo {
 
     private Long id;
 
-    private String email;
+    private String mail;
 
     private Authority authority;
 }

@@ -46,9 +46,9 @@ public class JwtUtil implements Serializable {
      * @return String
      */
     public TokenResponse generateToken(TokenInfo tokenInfo) {
-        String accessToken = generateTokenByType(Token.ACCESS_TOKEN, tokenInfo.getId(), tokenInfo.getEmail(),
+        String accessToken = generateTokenByType(Token.ACCESS_TOKEN, tokenInfo.getId(), tokenInfo.getMail(),
             tokenInfo.getAuthority());
-        String refreshToken = generateTokenByType(Token.REFRESH_TOKEN, tokenInfo.getId(), tokenInfo.getEmail(),
+        String refreshToken = generateTokenByType(Token.REFRESH_TOKEN, tokenInfo.getId(), tokenInfo.getMail(),
             tokenInfo.getAuthority());
 
         log.info("accessToken : " + accessToken);
@@ -65,7 +65,7 @@ public class JwtUtil implements Serializable {
      * @return String
      */
     public String generateRefreshToken(TokenInfo tokenInfo){
-        return generateTokenByType(Token.ACCESS_TOKEN, tokenInfo.getId(), tokenInfo.getEmail(),
+        return generateTokenByType(Token.ACCESS_TOKEN, tokenInfo.getId(), tokenInfo.getMail(),
             tokenInfo.getAuthority());
     }
 
@@ -78,17 +78,21 @@ public class JwtUtil implements Serializable {
      * @return String
      */
     public String generateTokenByType(Token tokenType, long userId, String email, Authority authority){
-        Long expirationSeconds = tokenType.equals(Token.ACCESS_TOKEN)? JWT_TOKEN_EXPIRATION : JWT_REFRESH_TOKEN_EXPIRATION;
+        long expirationSeconds = tokenType.equals(Token.ACCESS_TOKEN)? JWT_TOKEN_EXPIRATION : JWT_REFRESH_TOKEN_EXPIRATION;
 
         Map<String, Object> claims = new HashMap<>();
         claims.put(USER_ID_CLAIM, userId);
         claims.put(USER_AUTHORITY_CLAIM, authority);
         claims.put(EMAIL_CLAIM, email);
 
-        return Jwts.builder().setHeaderParam("typ", "JWT")
-            .setClaims(claims).setSubject(JWT_SUBJECT).setIssuedAt(new Date(System.currentTimeMillis()))
-            .setExpiration(new Date(System.currentTimeMillis() + expirationSeconds * 1000))
-            .signWith(SignatureAlgorithm.HS512, JWT_SECRET_KEY).compact();
+        return Jwts.builder()
+                .setHeaderParam("typ", "JWT")
+                .setClaims(claims)
+                .setSubject(JWT_SUBJECT)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + expirationSeconds * 1000))
+                .signWith(SignatureAlgorithm.HS512, JWT_SECRET_KEY)
+                .compact();
     }
 
     /**

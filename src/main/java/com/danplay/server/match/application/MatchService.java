@@ -1,17 +1,23 @@
 package com.danplay.server.match.application;
 
+import com.danplay.server.auth.application.AuthService;
 import com.danplay.server.match.domain.entity.Match;
 import com.danplay.server.match.domain.repository.MatchRepository;
 import com.danplay.server.match.dto.MatchRequest;
 import java.util.List;
+
+import com.danplay.server.user.domain.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 @RequiredArgsConstructor
 public class MatchService {
 
+	private final AuthService authService;
 	private final MatchRepository matchRepository;
 
 	public void registerMatch(Match match) {
@@ -34,5 +40,21 @@ public class MatchService {
 
 	public void updateMatch(Match match, MatchRequest matchRequest) {
 		match.updateMatch(matchRequest);
+	}
+
+	public void testJWT(HttpServletRequest httpServletRequest) {
+
+		// 회원가입 후, 로그인을 했을 때 나오는 토큰으로 진행
+
+		// -- 테스트 --
+		// 토큰을 넣지 않았을때
+		// 토큰에 노이즈를 넣었을 때
+
+		// 다음을 통해 토큰으로 유저 획득
+		final User user = authService.getUserByToken(httpServletRequest);
+
+		// 유저 출력
+		System.out.println(user.getMail());
+		System.out.println(user.getName());
 	}
 }
