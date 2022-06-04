@@ -1,9 +1,7 @@
 package com.danplay.server.match.dto;
 
 import com.danplay.server.match.domain.entity.Match;
-import com.danplay.server.user.domain.entity.UserMatch;
-import java.util.ArrayList;
-import java.util.Date;
+import com.danplay.server.usermatch.domain.entity.UserMatch;
 import java.util.List;
 import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;

@@ -2,6 +2,7 @@ package com.danplay.server.user.domain.entity;
 
 import com.danplay.server.auth.enumerations.Authority;
 import com.danplay.server.user.domain.enumerations.Gender;
+import com.danplay.server.usermatch.domain.entity.UserMatch;
 import lombok.*;
 
 import javax.persistence.*;

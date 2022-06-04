@@ -1,7 +1,7 @@
 package com.danplay.server.match.domain.entity;
 
 import com.danplay.server.match.dto.MatchRequest;
-import com.danplay.server.user.domain.entity.UserMatch;
+import com.danplay.server.usermatch.domain.entity.UserMatch;
 import lombok.Builder;
 import lombok.Getter;
 
