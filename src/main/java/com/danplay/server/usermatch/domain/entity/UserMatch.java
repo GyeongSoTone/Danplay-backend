@@ -15,11 +15,11 @@ public class UserMatch {
     @Column(name = "user_match_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "match_id")
     private Match match;
 
