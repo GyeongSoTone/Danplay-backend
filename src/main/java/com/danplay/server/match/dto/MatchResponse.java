@@ -1,9 +1,10 @@
 package com.danplay.server.match.dto;
 
 import com.danplay.server.match.domain.entity.Match;
+import com.danplay.server.user.dto.ParticipantResponse;
 import com.danplay.server.usermatch.domain.entity.UserMatch;
 import java.util.List;
-import javax.persistence.OneToMany;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,8 +22,7 @@ public class MatchResponse {
 
 	private int maxNumberOfParticipants;
 
-	@OneToMany(mappedBy = "match")
-	private List<UserMatch> participants;
+	private List<ParticipantResponse> participants;
 
 	private String place;
 
@@ -35,11 +35,16 @@ public class MatchResponse {
 	private String applyTime;
 
 	public static MatchResponse of(Match match) {
+		List<ParticipantResponse> participantResponses = match.getParticipants().stream()
+			.map(UserMatch::getUser)
+			.map(ParticipantResponse::of)
+			.collect(Collectors.toList());
+
 		return MatchResponse.builder()
 			.id(match.getId())
 			.sports(match.getSports())
 			.maxNumberOfParticipants(match.getMaxNumberOfParticipants())
-			.participants(match.getParticipants())
+			.participants(participantResponses)
 			.place(match.getPlace())
 			.title(match.getTitle())
 			.content(match.getContent())

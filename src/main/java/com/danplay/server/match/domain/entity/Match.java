@@ -2,11 +2,11 @@ package com.danplay.server.match.domain.entity;
 
 import com.danplay.server.match.dto.MatchRequest;
 import com.danplay.server.usermatch.domain.entity.UserMatch;
+import java.util.ArrayList;
 import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import lombok.NoArgsConstructor;
@@ -58,5 +58,27 @@ public class Match {
 		this.startTime = matchRequest.getStartTime();
 		this.title = matchRequest.getTitle();
 		this.content = matchRequest.getContent();
+	}
+
+	public void addUser(UserMatch userMatch) {
+		this.participants.add(userMatch);
+		if (userMatch.getMatch() != this) {
+			userMatch.setMatch(this);
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "Match{" +
+			"id=" + id +
+			", sports='" + sports + '\'' +
+			", maxNumberOfParticipants=" + maxNumberOfParticipants +
+			", participants=" + participants +
+			", place='" + place + '\'' +
+			", title='" + title + '\'' +
+			", content='" + content + '\'' +
+			", startTime=" + startTime +
+			", applyTime=" + applyTime +
+			'}';
 	}
 }

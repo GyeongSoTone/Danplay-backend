@@ -1,5 +1,6 @@
 package com.danplay.server.usermatch.dto;
 
+import com.danplay.server.match.domain.entity.Match;
 import com.danplay.server.user.domain.entity.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,7 @@ public class UserMatchResponse {
 
 	private Long id;
 
-	private Long userId;
+	private Match match;
 
 	private User user;
 }

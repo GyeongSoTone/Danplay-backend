@@ -22,4 +22,18 @@ public class UserMatch {
     @ManyToOne
     @JoinColumn(name = "match_id")
     private Match match;
+
+    public void setUser(User user) {
+        this.user = user;
+        if (user.getMatches().isEmpty() || !user.getMatches().contains(this)) {
+            user.addMatch(this);
+        }
+    }
+
+    public void setMatch(Match match) {
+        this.match = match;
+        if (match.getParticipants().isEmpty() || !match.getParticipants().contains(this)) {
+            match.addUser(this);
+        }
+    }
 }
