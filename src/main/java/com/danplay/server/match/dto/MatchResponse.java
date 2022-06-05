@@ -18,6 +18,8 @@ public class MatchResponse {
 
 	private Long id;
 
+	private Long hostId;
+
 	private String sports;
 
 	private int maxNumberOfParticipants;
@@ -42,6 +44,7 @@ public class MatchResponse {
 
 		return MatchResponse.builder()
 			.id(match.getId())
+			.hostId(getHostId(match))
 			.sports(match.getSports())
 			.maxNumberOfParticipants(match.getMaxNumberOfParticipants())
 			.participants(participantResponses)
@@ -51,5 +54,17 @@ public class MatchResponse {
 			.startTime(match.getStartTime().toString())
 			.applyTime(match.getApplyTime().toString())
 			.build();
+	}
+
+	private static Long getHostId(Match match) {
+		Long hostId = 0L;
+		List<UserMatch> participants = match.getParticipants();
+		for (UserMatch participant : participants) {
+			hostId = participant.getHostId();
+			if (hostId != 0L) {
+				return hostId;
+			}
+		}
+		return hostId;
 	}
 }

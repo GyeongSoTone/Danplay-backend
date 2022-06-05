@@ -24,8 +24,6 @@ public class ParticipantResponse {
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
-	private Boolean isHost;
-
 	public static ParticipantResponse of(User user) {
 		return ParticipantResponse.builder()
 			.id(user.getId())
@@ -33,7 +31,6 @@ public class ParticipantResponse {
 			.name(user.getName())
 			.phoneNumber(user.getPhoneNumber())
 			.gender(user.getGender())
-			.isHost(user.getIsHost())
 			.build();
 	}
 }

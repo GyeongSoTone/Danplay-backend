@@ -36,9 +36,6 @@ public class User {
     private Gender gender;
 
     @Setter
-    private Boolean isHost;
-
-    @Setter
     @OneToMany(mappedBy = "user")
     private List<PreferSport> preferSports;
 
@@ -65,7 +62,6 @@ public class User {
             ", phoneNumber='" + phoneNumber + '\'' +
             ", birth=" + birth +
             ", gender=" + gender +
-            ", isHost=" + isHost +
             ", preferSports=" + preferSports +
             ", matches=" + matches +
             ", authority=" + authority +

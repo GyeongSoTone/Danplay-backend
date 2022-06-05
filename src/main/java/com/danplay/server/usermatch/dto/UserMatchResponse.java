@@ -16,4 +16,6 @@ public class UserMatchResponse {
 	private Match match;
 
 	private User user;
+
+	private Long hostId;
 }

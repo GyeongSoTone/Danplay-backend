@@ -20,16 +20,13 @@ public class MatchService {
 	private final UserMatchRepository userMatchRepository;
 
 	public void registerMatch(Match match, User loginUser) {
-		// TODO::현재 match에 대해서만 host 수정
-		loginUser.setIsHost(true);
 		setUserMatch(match, loginUser);
 		matchRepository.save(match);
 	}
 
 	private void setUserMatch(Match match, User loginUser) {
-		UserMatch userMatch = new UserMatch();
-		userMatch.setUser(loginUser);
-		userMatch.setMatch(match);
+		Long hostId = loginUser.getId();
+		UserMatch userMatch = new UserMatch(loginUser, match, hostId);
 		userMatchRepository.save(userMatch);
 	}
 
