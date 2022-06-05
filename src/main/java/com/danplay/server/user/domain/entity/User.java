@@ -51,20 +51,4 @@ public class User {
             userMatch.setUser(this);
         }
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-            "id=" + id +
-            ", mail='" + mail + '\'' +
-            ", password='" + password + '\'' +
-            ", name='" + name + '\'' +
-            ", phoneNumber='" + phoneNumber + '\'' +
-            ", birth=" + birth +
-            ", gender=" + gender +
-            ", preferSports=" + preferSports +
-            ", matches=" + matches +
-            ", authority=" + authority +
-            '}';
-    }
 }

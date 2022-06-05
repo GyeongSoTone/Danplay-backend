@@ -66,19 +66,4 @@ public class Match {
 			userMatch.setMatch(this);
 		}
 	}
-
-	@Override
-	public String toString() {
-		return "Match{" +
-			"id=" + id +
-			", sports='" + sports + '\'' +
-			", maxNumberOfParticipants=" + maxNumberOfParticipants +
-			", participants=" + participants +
-			", place='" + place + '\'' +
-			", title='" + title + '\'' +
-			", content='" + content + '\'' +
-			", startTime=" + startTime +
-			", applyTime=" + applyTime +
-			'}';
-	}
 }

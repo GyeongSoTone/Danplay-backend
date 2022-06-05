@@ -65,10 +65,4 @@ public class MatchController {
 		matchService.registerMatch(match);
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
-
-	@PostMapping("/test")
-	public ResponseEntity<HttpStatus> testJWT(HttpServletRequest httpServletRequest) {
-//		matchService.testJWT(httpServletRequest);
-		return ResponseEntity.status(HttpStatus.OK).build();
-	}
 }
