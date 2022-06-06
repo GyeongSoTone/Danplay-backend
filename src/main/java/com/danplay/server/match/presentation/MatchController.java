@@ -1,9 +1,11 @@
 package com.danplay.server.match.presentation;
 
+import com.danplay.server.auth.application.AuthService;
 import com.danplay.server.match.application.MatchService;
 import com.danplay.server.match.domain.entity.Match;
 import com.danplay.server.match.dto.MatchRequest;
 import com.danplay.server.match.dto.MatchResponse;
+import com.danplay.server.user.domain.entity.User;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -26,10 +28,12 @@ import javax.servlet.http.HttpServletRequest;
 public class MatchController {
 
 	private final MatchService matchService;
+	private final AuthService authService;
 
 	@PostMapping("/register")
-	public ResponseEntity<HttpStatus> registerMatch(@RequestBody MatchRequest matchRequest) {
-		matchService.registerMatch(matchRequest.toEntity());
+	public ResponseEntity<HttpStatus> registerMatch(@RequestBody MatchRequest matchRequest, HttpServletRequest httpServletRequest) {
+		User userByToken = authService.getUserByToken(httpServletRequest);
+		matchService.registerMatch(matchRequest.toEntity(), userByToken);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
@@ -59,12 +63,6 @@ public class MatchController {
 		final Match match = matchService.findMatchById(matchId);
 		matchService.updateMatch(match, matchRequest);
 		matchService.registerMatch(match);
-		return ResponseEntity.status(HttpStatus.OK).build();
-	}
-
-	@PostMapping("/test")
-	public ResponseEntity<HttpStatus> testJWT(HttpServletRequest httpServletRequest) {
-		matchService.testJWT(httpServletRequest);
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 }

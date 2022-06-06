@@ -1,15 +1,16 @@
 package com.danplay.server.match.domain.entity;
 
 import com.danplay.server.match.dto.MatchRequest;
-import com.danplay.server.user.domain.entity.UserMatch;
+import com.danplay.server.usermatch.domain.entity.UserMatch;
+import java.util.ArrayList;
 import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
@@ -21,6 +22,9 @@ public class Match {
 	@GeneratedValue
 	@Column(name = "match_id")
 	private Long id;
+
+	@Setter
+	private Long hostId;
 
 	private String sports;
 
@@ -41,8 +45,9 @@ public class Match {
 	private Date applyTime;
 
 	@Builder
-	public Match(String sports, int maxNumberOfParticipants, String place, String title,
+	public Match(Long hostId, String sports, int maxNumberOfParticipants, String place, String title,
 		String content, Date startTime) {
+		this.hostId = hostId;
 		this.sports = sports;
 		this.maxNumberOfParticipants = maxNumberOfParticipants;
 		this.place = place;
