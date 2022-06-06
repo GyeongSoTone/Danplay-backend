@@ -45,10 +45,4 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Authority authority = Authority.USER;
 
-    public void addMatch(UserMatch userMatch) {
-        this.matches.add(userMatch);
-        if (userMatch.getUser() != this) {
-            userMatch.setUser(this);
-        }
-    }
 }
