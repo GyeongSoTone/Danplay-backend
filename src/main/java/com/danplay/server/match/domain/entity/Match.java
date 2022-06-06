@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
@@ -21,6 +22,9 @@ public class Match {
 	@GeneratedValue
 	@Column(name = "match_id")
 	private Long id;
+
+	@Setter
+	private Long hostId;
 
 	private String sports;
 
@@ -41,8 +45,9 @@ public class Match {
 	private Date applyTime;
 
 	@Builder
-	public Match(String sports, int maxNumberOfParticipants, String place, String title,
+	public Match(Long hostId, String sports, int maxNumberOfParticipants, String place, String title,
 		String content, Date startTime) {
+		this.hostId = hostId;
 		this.sports = sports;
 		this.maxNumberOfParticipants = maxNumberOfParticipants;
 		this.place = place;
@@ -58,12 +63,5 @@ public class Match {
 		this.startTime = matchRequest.getStartTime();
 		this.title = matchRequest.getTitle();
 		this.content = matchRequest.getContent();
-	}
-
-	public void addUser(UserMatch userMatch) {
-		this.participants.add(userMatch);
-		if (userMatch.getMatch() != this) {
-			userMatch.setMatch(this);
-		}
 	}
 }

@@ -26,7 +26,8 @@ public class MatchService {
 
 	private void setUserMatch(Match match, User loginUser) {
 		Long hostId = loginUser.getId();
-		UserMatch userMatch = new UserMatch(loginUser, match, hostId);
+		match.setHostId(hostId);
+		UserMatch userMatch = new UserMatch(loginUser, match);
 		userMatchRepository.save(userMatch);
 	}
 

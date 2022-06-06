@@ -7,7 +7,6 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Getter
@@ -27,13 +26,9 @@ public class UserMatch {
     @JoinColumn(name = "match_id")
     private Match match;
 
-    @Setter
-    private Long hostId;
-
     @Builder
-    public UserMatch(User user, Match match, Long hostId) {
+    public UserMatch(User user, Match match) {
         this.user = user;
         this.match = match;
-        this.hostId = hostId;
     }
 }
